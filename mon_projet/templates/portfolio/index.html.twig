@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block body %}
+<h1>Mon E-Portfolio</h1>
+
+<p>Voici quelques compétences démontrées via des projets et preuves :</p>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4>Administration Réseau</h4>
+            <p>Installation, configuration Serveur DHCP/DNS.</p>
+            <a class="btn btn-primary">Voir preuve</a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4>Développement Symfony</h4>
+            <p>Portfolio complet en PHP/Symfony.</p>
+            <a class="btn btn-primary">Voir preuve</a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card p-3">
+            <h4>Cybersécurité</h4>
+            <p>Analyse de vulnérabilités + rapport.</p>
+            <a class="btn btn-primary">Voir preuve</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

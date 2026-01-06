@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ competence.titre }}{% endblock %}
+
+{% block body %}
+<h1>{{ competence.titre }}</h1>
+
+<div class="mt-4">
+    {% for apprentissage in competence.apprentissages %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <strong>{{ apprentissage.code }}</strong> - {{ apprentissage.titre }}
+        </div>
+        <div class="card-body">
+            <p>{{ apprentissage.details }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

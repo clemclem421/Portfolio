@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<h1 class="text-center">Ruard Clément</h1>
+<p class="text-center">Groupe TP : B1</p>
+
+<p class="text-center mt-3">Bienvenue sur mon portfolio personnel. Découvrez mes projets, mes compétences et mon CV.</p>
+
+<div class="mt-5 text-center">
+    <div class="card p-4 bg-light border">
+        <h3>Pour en savoir plus</h3>
+        <p>Découvrez mes loisirs, passions et projets en images.</p>
+        <a href="{{ path('loisirs') }}" class="btn btn-primary">Voir plus</a>
+    </div>
+</div>
+{% endblock %}

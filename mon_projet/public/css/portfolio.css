@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0e0e11;
+    color: #fff;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10%;
+    background: #14141f;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #c7c7c7;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #7b5cff;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(145deg, #242435, #14141f);
+}
+
+.hero-content span {
+    color: #7b5cff;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #7b5cff;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #9a7dff;
+}
+
+/* SECTIONS */
+.section {
+    padding: 80px 15%;
+}
+
+/* COMPÉTENCES */
+.skills-grid, .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.skill-card, .project-card {
+    padding: 20px;
+    background: #1c1c28;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #cccccc; /* gris clair au survol (optionnel) */
+}
+
+/* --- Icônes des compétences et projets --- */
+.skill-icon {
+    width: 120px;            /* Taille ajustée */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;  /* Centrer + espace dessous */
+    filter: invert(1);        /* Rend l'icône blanche si elle est noire */
+    opacity: 0.85;            /* Effet plus doux */
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.skill-card:hover .skill-icon {
+    transform: scale(1.05);   /* Petit zoom au survol */
+    opacity: 1;
+}
+
+/* Centrage du contenu dans les cartes */
+.skill-card {
+    text-align: center;
+    padding-top: 20px;
+}
+
+/* --- Konami: modal, secret-mode et confetti --- */
+.konami-modal {
+  position: fixed;
+  left: 50%;
+  top: 12%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.9);
+  color: #fff;
+  padding: 22px;
+  border-radius: 10px;
+  z-index: 99999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  max-width: 90%;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+}
+
+.konami-modal h2 { margin: 0 0 8px; font-size: 20px; }
+.konami-modal p { margin: 0 0 12px; color: #ddd; }
+
+.konami-close {
+  display:inline-block;
+  background:#ffffff22;
+  color:#fff;
+  padding:6px 10px;
+  border-radius:6px;
+  text-decoration:none;
+  margin-top:8px;
+  cursor:pointer;
+}
+
+/* Confetti pieces */
+.konfetti {
+  position: fixed;
+  width: 10px;
+  height: 14px;
+  z-index: 99990;
+  pointer-events: none;
+  opacity: 0.95;
+  transform-origin: center;
+  border-radius: 2px;
+}
+
+/* secret visual mode (ex: neon) */
+.secret-mode {
+  background: radial-gradient(circle at 10% 10%, #071428 0%, #03030a 50%, #000 100%) !important;
+  color: #cfeefc !important;
+}
+
+/* small animation for confetti pieces */
+@keyframes konfetti-fall {
+  0% { transform: translateY(-10vh) rotate(0deg) scale(1); opacity:1; }
+  100% { transform: translateY(110vh) rotate(720deg) scale(0.9); opacity:0.9; }
+}

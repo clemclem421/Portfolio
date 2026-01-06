@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes loisirs et passions - Portfolio{% endblock %}
+
+{% block stylesheets %}
+<style>
+    h1 {
+        text-align: center;
+        color: #667eea;
+        margin-bottom: 3rem;
+        font-size: 2.5rem;
+    }
+
+    .loisirs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .loisir-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .loisir-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    .loisir-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-bottom: 3px solid #667eea;
+    }
+
+    .loisir-content {
+        padding: 1.5rem;
+    }
+
+    .loisir-titre {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #667eea;
+        margin-bottom: 0.5rem;
+    }
+
+    .loisir-description {
+        color: #666;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+        .loisirs-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<h1>Mes loisirs et passions</h1>
+
+<div class="loisirs-grid">
+    {% for loisir in loisirs %}
+    <div class="loisir-card">
+        <img src="{{ asset('images/loisirs/' ~ loisir.image) }}" 
+             alt="{{ loisir.titre }}" 
+             class="loisir-image"
+             onerror="this.src='https://via.placeholder.com/400x250/667eea/ffffff?text={{ loisir.titre|url_encode }}'">
+        <div class="loisir-content">
+            <h3 class="loisir-titre">{{ loisir.titre }}</h3>
+            <p class="loisir-description">{{ loisir.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

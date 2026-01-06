@@ -1,17 +1,193 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Mon Portfolio{% endblock %}</title>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <!-- Bootswatch thème -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5/dist/cosmo/bootstrap.min.css">
+
+    {% block stylesheets %}
+    <style>
+        footer {
+            background: #111;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        a.nav-link, a.navbar-brand { color: white !important; }
+        a.nav-link:hover { color: #ccc !important; }
+    </style>
+    {% endblock %}
+</head>
+
+<!-- ===================== KONAMI CODE SCRIPT ===================== -->
+<script>
+(function(){
+    const KONAMI = ['e','a','s','t','e','r','e','g','g'];
+    let input = [];
+
+    // ---- CONFETTI FULLSCREEN ----
+    function spawnConfettiBurst() {
+        const colors = ['#7b5cff','#ff7b7b','#ffd57b','#7bffdf','#7bffd5'];
+        const count = 60;
+
+        for (let i = 0; i < count; i++) {
+            const piece = document.createElement('div');
+            piece.className = 'konfetti';
+
+            const size = 8 + Math.random()*12;
+
+            piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+            piece.style.width = size + 'px';
+            piece.style.height = (size*1.4) + 'px';
+
+            piece.style.position = "fixed";
+            piece.style.left = Math.random()*100 + 'vw';
+            piece.style.top = "-10vh";
+
+            const rotate = Math.random()*360;
+            piece.style.transform = `rotate(${rotate}deg)`;
+            piece.style.opacity = 0.95;
+
+            const duration = 3000 + Math.random()*2000;
+            piece.style.animation = `konfetti-fall ${duration}ms linear forwards`;
+
+            document.body.appendChild(piece);
+
+            setTimeout(() => piece.remove(), duration + 500);
+        }
+    }
+
+    // ---- ANIMATION: keep spawning confetti for 10 sec ----
+    function launchConfettiFor10s(){
+        spawnConfettiBurst(); 
+        const interval = setInterval(spawnConfettiBurst, 500);
+        setTimeout(() => clearInterval(interval), 10000);
+    }
+
+    // ---- MODAL ----
+    function showModal(){
+        if(document.querySelector('.konami-modal')) return;
+
+        const modal = document.createElement('div');
+        modal.className = 'konami-modal';
+        modal.innerHTML = `
+          <h2>🎉 Mode secret activé !</h2>
+          <p>Vous avez découvert l'easter egg — bienvenue dans la zone secrète.</p>
+          <a class="konami-close">Fermer</a>
+        `;
+
+        document.body.appendChild(modal);
+
+        modal.querySelector('.konami-close').addEventListener('click', ()=> modal.remove());
+
+        setTimeout(()=>modal.remove(), 7000);
+    }
+
+    // ---- ACTIVATION ----
+    function activateKonami(){
+        document.body.classList.add('secret-mode');
+        showModal();
+        launchConfettiFor10s();
+
+        setTimeout(() => {
+            document.body.classList.remove('secret-mode');
+        }, 12000);
+    }
+
+    // ---- KEY LISTENER ----
+    window.addEventListener('keydown', (e)=>{
+        input.push(e.key);
+        if (input.length > KONAMI.length) input.shift();
+
+        if (KONAMI.every((k,i) => input[i] === k)) {
+            activateKonami();
+            input = [];
+        }
+    }, {passive:true});
+})();
+</script>
+
+<!-- ===================== STYLES ===================== -->
+<style>
+    /* Confettis */
+    .konfetti {
+        position: fixed;
+        z-index: 99999;
+        pointer-events: none;
+        border-radius: 2px;
+        opacity: 0.9;
+    }
+
+    @keyframes konfetti-fall {
+        0% {
+            transform: translateY(-10vh) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(120vh) rotate(720deg);
+            opacity: 0.9;
+        }
+    }
+
+    /* Modal Konami */
+    .konami-modal {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+        padding: 15px 25px;
+        border-radius: 10px 10px 0 0;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+        z-index: 999999;
+        text-align: center;
+        animation: slideUp 0.4s ease-out;
+    }
+
+    @keyframes slideUp {
+        from { transform: translate(-50%, 100%); }
+        to   { transform: translate(-50%, 0); }
+    }
+
+    .konami-close {
+        display: inline-block;
+        margin-top: 10px;
+        cursor: pointer;
+        color: #007bff;
+        font-weight: bold;
+    }
+</style>
+
+<body class="d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="{{ path('home') }}">Mon Portfolio</a>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('cv') }}">CV</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('loisirs') }}">Loisirs</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('competences_rt1') }}"> - Administrer</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('competences_rt2') }}"> - Connecter</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ path('competences_rt3') }}"> - Créer</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4 flex-grow-1">
+    {% block body %}{% endblock %}
+</div>
+
+<footer>
+    © {{ "now"|date("Y") }} - Ruard.  
+    Site protégé. Toute copie est interdite.
+</footer>
+
+</body>
 </html>

@@ -1,0 +1,9 @@
+navbar:
+  home: "Home"
+  loisirs: "Hobbies"
+  cv: "Resume"
+  portfolio: "Portfolio"
+  print: "Print Resume"
+
+intro:
+  welcome: "Welcome to my personal portfolio."
